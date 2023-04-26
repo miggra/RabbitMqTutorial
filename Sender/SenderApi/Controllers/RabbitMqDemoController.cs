@@ -8,9 +8,9 @@ namespace SenderApi.Controllers;
 [Route("[controller]")]
 public class RabbitMqDemoController : ControllerBase
 {
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<RabbitMqDemoController> _logger;
 
-    public RabbitMqDemoController(ILogger<WeatherForecastController> logger)
+    public RabbitMqDemoController(ILogger<RabbitMqDemoController> logger)
     {
         _logger = logger;
     }
