@@ -24,8 +24,8 @@ public class RabbitMqDemoController : ControllerBase
         using var channel = connection.CreateModel();
 
         channel.QueueDeclare(
-            queue: "SimpleMessageQueue",
-            durable: false,
+            queue: "DurableMessageQueue",
+            durable: true,
             exclusive: false,
             autoDelete: false,
             arguments: null
@@ -33,10 +33,14 @@ public class RabbitMqDemoController : ControllerBase
 
         var body = Encoding.UTF8.GetBytes(message);
 
+        var properties = channel.CreateBasicProperties();
+        properties.Persistent = true; //сообщения все равно исчезают
+
+
         channel.BasicPublish(
           exchange: String.Empty,
-          routingKey: "SimpleMessageQueue", // should match with queue name
-          basicProperties: null,
+          routingKey: "DurableMessageQueue", // should match with queue name
+          basicProperties: properties,
           body: body
         );
 
