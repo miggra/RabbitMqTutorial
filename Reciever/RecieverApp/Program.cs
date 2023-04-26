@@ -3,7 +3,8 @@ using RecieverApp.Workers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddHostedService<RabbitMessageReciever>();
+// builder.Services.AddHostedService<RabbitMessageReciever>();
+builder.Services.AddHostedService<FunoutMessageMonitor>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
