@@ -51,4 +51,17 @@ public class RabbitMqDemoController : ControllerBase
         _messageProducer.PublishDirect(message, exchangeName, routingKey);
         return Ok();
     }
+
+    /// <summary>
+    /// Grouping for queue
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    [HttpPost("send-topic", Name = "SendTopicMessages")]
+    public IActionResult SendTopicMessages(string message, string routingKey)
+    {
+        string exchangeName = "topicExchange";
+        _messageProducer.PublishTopic(message, exchangeName, routingKey);
+        return Ok();
+    }
 }

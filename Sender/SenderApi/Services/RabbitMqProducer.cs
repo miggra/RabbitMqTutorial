@@ -65,6 +65,19 @@ public class RabbitMqProducer: IMessageProducer
         );
     }
 
+    public void PublishTopic(string message, string exchange, string routingKey)
+    {
+        _channel.ExchangeDeclare(exchange, ExchangeType.Topic);
+
+        var body = Encoding.UTF8.GetBytes(message);
+        _channel.BasicPublish(
+          exchange: exchange,
+          routingKey: routingKey,
+          basicProperties: null,
+          body: body
+        );
+    }
+
     public void Dispose()
     {
         _channel.Close();

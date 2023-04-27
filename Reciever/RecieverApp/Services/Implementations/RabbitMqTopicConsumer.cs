@@ -5,13 +5,12 @@ using RabbitMQ.Client.Events;
 using RecieverApp.Options;
 
 namespace RecieverApp.Services;
-public class RabbitMqDirectConsumer: RabbitMqConsumer, IMessageConsumer
+public class RabbitMqTopicConsumer: RabbitMqConsumer, IMessageConsumer
 {
-    public RabbitMqDirectConsumer(
+    public RabbitMqTopicConsumer(
         IOptions<RabbitMqOptions> options): base(options)
     {
-        _channel.ExchangeDeclare(exchange: _options.DirectExchangeName, type: ExchangeType.Direct);
-
+        _channel.ExchangeDeclare(exchange: _options.TopicExchangeName, type: ExchangeType.Topic);
         // declare a server-named queue
         _queueName = _channel.QueueDeclare().QueueName;
 
@@ -21,7 +20,7 @@ public class RabbitMqDirectConsumer: RabbitMqConsumer, IMessageConsumer
         foreach (var routingKey in _options.BindingKeys)
         {
             _channel.QueueBind(queue: _queueName,
-                exchange: _options.DirectExchangeName,
+                exchange: _options.TopicExchangeName,
                 routingKey: routingKey);
         }
     }
