@@ -6,5 +6,7 @@ namespace RecieverApp.Options
         public string? HostName {get; set;}
         public string? SimpleQueueName { get; set; }
         public string? FunoutExchangeName { get; set; }
+        public string? DirectExchangeName { get; set; }
+        public string[]? DirectRoutingKeys { get; set; }
     }
 }

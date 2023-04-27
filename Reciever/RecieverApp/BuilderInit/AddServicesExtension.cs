@@ -10,7 +10,8 @@ public static class AddServicesExtension
     public static void AddServices(this IServiceCollection services)
     {
         // services.AddSingleton<IMessageConsumer, RabbitMqSimpleQueueConsumer>();
-        services.AddSingleton<IMessageConsumer, RabbitMqFunoutConsumer>();
+        // services.AddSingleton<IMessageConsumer, RabbitMqFunoutConsumer>();
+        services.AddSingleton<IMessageConsumer, RabbitMqDirectConsumer>();
         services.AddSingleton<IDummyService, DummyService>();
     }
 }
